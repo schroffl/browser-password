@@ -39,6 +39,7 @@ Vue.component('tray', {
 		<li class="vault-tray"> 
 			<div v-on:click="!editing && $emit('insert', data)" class="tray-segment tray-segment-fill" :class="{ clickable: !editing }">
 				<div class="tray-thumbnail">
+					<!-- FIXME: When scrolling the overlay is shifted and not on top of the image anymore-->
 					<div class="thumbnail-overlay" v-on:click.stop="toggleEdit" :title="editing ? 'Save' : 'Edit'">
 						<i class="fa fa-pencil" v-if="!editing"></i>
 						<i class="fa fa-check" v-if="editing"></i>
@@ -93,6 +94,8 @@ Vue.component('tray', {
 			this.editing = !this.editing;
 		},
 		'undoChanges': function() {
+			// FIXME: Seems like it doesn't work as intended
+
 			Object.assign(this.data, this.savepoint);
 		},
 		'copyPassword': function() {
@@ -119,6 +122,15 @@ Vue.component('tray', {
 				return;
 
 			input.focus();
+		}
+	},
+	'ready': function() {
+		if(this.data.new) {
+			this.data.new = false;
+			this.toggleEdit();
+
+			this.$el.parentNode.scrollTop = this.$el.offsetTop;
+			console.log(this.$el.parentNode, this.$el);
 		}
 	}
 });
