@@ -23,7 +23,7 @@ class WebCryptoHelper {
 	static deriveKey(password) {
 		let passwordBuf = WebCryptoHelper.str2ab(password);
 
-		// TODO: Don't use a fixed salt!!
+		// TODO: Don't use a fixed salt and increase iterations!!
 		return subtle.importKey('raw', passwordBuf, { 'name': 'PBKDF2' }, false, [ 'deriveKey' ])
 			.then(baseKey => subtle.deriveKey(
 				{'name': 'PBKDF2', 'salt': WebCryptoHelper.str2ab('salt'), 'iterations': 10000, 'hash': 'SHA-512' },
