@@ -9,8 +9,7 @@ window.onload = function() {
 			'vault': Vault,
 			'wrongPassword': false,
 			'showLock': true,
-			'title': 'Vault',
-			'editing': false
+			'title': 'Vault'
 		},
 		'methods': {
 			'unlock': function(event) {
@@ -28,10 +27,11 @@ window.onload = function() {
 			'insertData': function(data) {
 				return sendMessageToActiveTab({ 'action': 'insert', data }).then(window.close);
 			},
-			'editTray': function(tray) {
-				console.log(tray);
-
-				this.editing = true;				
+			'addTray': function() {
+				this.vault.add();
+			},
+			'removeTray': function(tray) {
+				this.vault.remove(tray);
 			}
 		}
 	});
