@@ -128,9 +128,6 @@ Vue.component('tray', {
 		if(this.data.new) {
 			this.data.new = false;
 			this.toggleEdit();
-
-			this.$el.parentNode.scrollTop = this.$el.offsetTop;
-			console.log(this.$el.parentNode, this.$el);
 		}
 	}
 });
