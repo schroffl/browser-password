@@ -23,10 +23,19 @@ class Vault {
 
 	lock() {
 		return this.getKey()
-			.then(key => this.storage.set(this.id, this.entries, key))
-			.then(() => this.entries = [ ])
-			.then(() => this.key = null)
-			.then(() => this.locked = true);
+			.then(this.store)
+			.then(this.reset);
+	}
+
+	store() {
+		return this.getKey()
+			.then(key => this.storage.set(this.id, this.entries, key));
+	}
+
+	reset() {
+		this.entries = [ ];
+		this.key = null;
+		this.locked = true;
 	}
 
 	getKey(password) {
