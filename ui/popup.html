@@ -18,11 +18,17 @@
 			</div>
 
 			<div class="tray-header">
-				<h1 class="center">{{ title }}</h1>
+				<div class="header-segment header-segment-fill">
+					<h1 class="center">{{ title }}</h1>
+				</div>
+
+				<div class="header-segment header-segment-button clickable" v-on:click="addTray">
+					<i class="fa fa-plus"></i>
+				</div>
 			</div>
 
 			<ul class="vault-trays">
-				<tray v-for="entry in vault.entries" :data="entry" v-on:insert="insertData" v-on:delete="removeEntry"> 
+				<tray v-for="entry in vault.entries" :data="entry" v-on:insert="insertData" v-on:delete="removeTray"> 
 			</ul>
 		</div>
 	</body>
