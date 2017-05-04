@@ -12,6 +12,36 @@ class Vault {
 		this.locked = true;
 	}
 
+	add() {
+		this.entries.push({
+			'name': 'New Tray',
+			'new': true,
+			'props': {
+				'credentials': {
+					'username': '',
+					'password': ''
+				},
+				'other': {
+					'thumbnail': 'img/key.svg',
+					'domain': ''
+				}
+			}
+		});
+
+		return this.store();
+	}
+
+	remove(entry) {
+		let index = this.entries.indexOf(entry);
+
+		if(index > -1) {
+			this.entries.splice(index, 1);
+
+			return this.store();
+		} else
+			return Promise.reject('Not found');
+	}
+
 	unlock(password) {
 		return this.getKey(password)
 			.then(key => this.storage.get(this.id, key))
