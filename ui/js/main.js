@@ -1,12 +1,10 @@
 'use strict';
 
-const Vault = chrome.extension.getBackgroundPage().vault; // TODO: Use chrome.runtime.getBackgroundPage (async)
-
-window.onload = function() {
+Promise.all([ getVault(), onload() ]).then(result => {
 	window.app = new Vue({
 		'el': '#vault',
 		'data': {
-			'vault': Vault,
+			'vault': result.shift(),
 			'wrongPassword': false,
 			'showLock': true,
 			'title': 'Vault'
@@ -38,7 +36,15 @@ window.onload = function() {
 			}
 		}
 	});
-};
+});
+
+function onload() {
+	return new Promise(resolve => window.addEventListener('load', resolve, false));
+}
+
+function getVault() {
+	return new Promise(resolve => chrome.runtime.getBackgroundPage(page => resolve(page.vault)));
+}
 
 function sendMessageToActiveTab(message) {
 	return new Promise((resolve, reject) => {
