@@ -26,4 +26,10 @@ class EncryptedJSONStorage {
 			.then(obj => WebCryptoHelper.decrypt(obj, key))
 			.then(JSON.parse);
 	}
+
+	has(name) {
+		return new Promise(resolve => {
+			this.storage.get(name, obj => resolve(name in obj));
+		});
+	}
 }
