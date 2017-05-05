@@ -324,13 +324,8 @@ body {
 	white-space: nowrap;
 }
 .light-input:focus {
-	/*border: 1px solid lightgrey;
-	border-radius: 3px;*/
 	outline: none;
-
 	box-shadow: #777 0 0 6px;
-
-	/*padding: 1px 3px; /* normal padding minus border width => This prevents the  */
 }
 
 @keyframes open-vault {
