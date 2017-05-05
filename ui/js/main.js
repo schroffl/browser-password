@@ -24,6 +24,9 @@ window.onload = function() {
 
 				return this.vault.unlock(password).catch(err => this.wrongPassword = true);
 			},
+			'lock': function() {
+				return this.vault.lock();
+			},
 			'insertData': function(data) {
 				return sendMessageToActiveTab({ 'action': 'insert', data }).then(window.close);
 			},
