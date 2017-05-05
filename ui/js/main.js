@@ -25,6 +25,9 @@ Promise.all([ getVault(), onload() ]).then(result => {
 			'lock': function() {
 				return this.vault.lock();
 			},
+			'save': function() {
+				return this.vault.store();
+			},
 			'insertData': function(data) {
 				return sendMessageToActiveTab({ 'action': 'insert', data }).then(window.close);
 			},

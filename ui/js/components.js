@@ -88,8 +88,11 @@ Vue.component('tray', {
 		'toggleEdit': function() {
 			if(!this.editing)
 				this.createSavepoint();
-			else if(this.editing)
+			else if(this.editing) {
+				// The save button was presed
+				this.$emit('save');
 				this.savepoint = null;
+			}
 
 			this.editing = !this.editing;
 		},

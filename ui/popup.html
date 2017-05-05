@@ -32,7 +32,7 @@
 			</div>
 
 			<ul class="vault-trays">
-				<tray v-for="entry in vault.entries" :data="entry" v-on:insert="insertData" v-on:delete="removeTray"> 
+				<tray v-for="entry in vault.entries" :data="entry" v-on:insert="insertData" v-on:delete="removeTray" v-on:save="save"> 
 			</ul>
 		</div>
 	</body>
