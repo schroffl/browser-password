@@ -44,6 +44,11 @@ class Vault {
 
 	unlock(password) {
 		return this.getKey(password)
+			.then(key => {
+				return this.storage.has(this.id)
+					.then(has => has ? Promise.resolve() : this.store())
+					.then(() => key);				
+			})
 			.then(key => this.storage.get(this.id, key))
 			.then(entries => {
 				this.entries = entries;
@@ -51,10 +56,10 @@ class Vault {
 			});
 	}
 
-	lock() {
+	lock() {	
 		return this.getKey()
-			.then(this.store)
-			.then(this.reset);
+			.then(() => this.store())
+			.then(() => this.reset());
 	}
 
 	store() {
