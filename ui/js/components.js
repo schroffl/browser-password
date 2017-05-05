@@ -87,16 +87,20 @@ Vue.component('tray', {
 	'methods': {
 		'toggleEdit': function() {
 			if(!this.editing)
-				this.savepoint = JSON.parse(JSON.stringify(this.data));
+				this.createSavepoint();
 			else if(this.editing)
 				this.savepoint = null;
 
 			this.editing = !this.editing;
 		},
+		'createSavepoint': function() {
+			this.savepoint = JSON.parse(JSON.stringify(this.data));
+		},
 		'undoChanges': function() {
-			// FIXME: Seems like it doesn't work as intended
+			// FIXME: When resetting the data, the width of the input is not set appropriately 
 
 			Object.assign(this.data, this.savepoint);
+			this.createSavepoint();
 		},
 		'copyPassword': function() {
 			let input = document.createElement('input');
