@@ -19,14 +19,13 @@ body {
 	height: 400px;
 }
 
-/* FIXME: This div is on top of the body border */
 .lock {
 	position: fixed;
 
 	display: table;
 	
-	width: 100%;
-	height: 100%;
+	width: inherit;
+	height: inherit;
 	
 	background-color: hsl(0, 0%, 90%);
 }
