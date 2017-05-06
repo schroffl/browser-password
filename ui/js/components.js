@@ -39,7 +39,6 @@ Vue.component('tray', {
 		<li class="vault-tray"> 
 			<div v-on:click="!editing && $emit('insert', data)" class="tray-segment tray-segment-fill" :class="{ clickable: !editing }">
 				<div class="tray-thumbnail">
-					<!-- FIXME: When scrolling the overlay is shifted and not on top of the image anymore-->
 					<div class="thumbnail-overlay" v-on:click.stop="toggleEdit" :title="editing ? 'Save' : 'Edit'">
 						<i class="fa fa-pencil" v-if="!editing"></i>
 						<i class="fa fa-check" v-if="editing"></i>
