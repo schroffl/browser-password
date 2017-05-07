@@ -11,7 +11,7 @@
 	<body>
 		<div class="vault" id="vault">
 			
-			<div class="lock" :class="{ unlocked: !vault.locked }">
+			<div class="lock" :class="{ unlocked: !vault.locked && justUnlocked }" v-if="justUnlocked || vault.locked">
 				<div class="lock-container">
 					<input type="password" :class="{ wrong: wrongPassword }" class="lock-master-input" v-on:change="unlock" v-on:input="wrongPassword = false" autofocus :disabled="!vault.locked"  />
 				</div>

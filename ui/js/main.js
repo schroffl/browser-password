@@ -7,7 +7,8 @@ Promise.all([ getVault(), onload() ]).then(result => {
 			'vault': result.shift(),
 			'wrongPassword': false,
 			'showLock': true,
-			'title': 'Vault'
+			'title': 'Vault',
+			'justUnlocked': false
 		},
 		'methods': {
 			'unlock': function(event) {
@@ -20,7 +21,9 @@ Promise.all([ getVault(), onload() ]).then(result => {
 					event.target.value = '';
 				});
 
-				return this.vault.unlock(password).catch(err => this.wrongPassword = true);
+				return this.vault.unlock(password)
+					.then(() => this.justUnlocked = true)
+					.catch(err => this.wrongPassword = true);
 			},
 			'lock': function() {
 				return this.vault.lock();
