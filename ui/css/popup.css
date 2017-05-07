@@ -333,7 +333,7 @@ body {
 }
 
 @keyframes open-vault {
-	100% { margin-left: -250%; }
+	to { margin-left: -250%; }
 }
 
 @keyframes turn-lock {
