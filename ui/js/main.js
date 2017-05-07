@@ -40,6 +40,18 @@ Promise.all([ getVault(), onload() ]).then(result => {
 			'removeTray': function(tray) {
 				this.vault.remove(tray);
 			}
+		},
+		'ready': function() {
+			let lockElem = this.$el.querySelector('.lock'),
+				passwordElem = this.$el.querySelector('.lock input');
+
+			lockElem.addEventListener('animationend', e => {
+				switch(e.animationName) {
+					case 'open-vault':
+						passwordElem.value = '';
+						break;
+				}
+			});
 		}
 	});
 });
