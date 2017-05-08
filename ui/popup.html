@@ -11,22 +11,22 @@
 	<body>
 		<div class="vault" id="vault">
 			
-			<div class="lock" :class="{ unlocked: !vault.locked && justUnlocked }" v-if="justUnlocked || vault.locked">
+			<div class="lock" :class="{ 'open-anim': justUnlocked && !justLocked, 'close-anim': justLocked && !justUnlocked }" v-if="justUnlocked || vault.locked">
 				<div class="lock-container">
 					<input type="password" :class="{ wrong: wrongPassword }" class="lock-master-input" v-on:change="unlock" v-on:input="wrongPassword = false" autofocus :disabled="!vault.locked"  />
 				</div>
 			</div>
 
-			<div class="tray-header">
-				<div class="header-segment header-segment-button clickable" title="Close Vault" v-on:click="lock">
+			<div class="vault-header segmented">
+				<div class="segment segment-button clickable" title="Close Vault" v-on:click="lock">
 					<i class="fa fa-lock"></i>
 				</div>
 
-				<div class="header-segment header-segment-fill">
+				<div class="segment fill">
 					<h1 class="center">{{ title }}</h1>
 				</div>
 
-				<div class="header-segment header-segment-button clickable" title="Add Tray" v-on:click="addTray">
+				<div class="segment segment-button clickable" title="Add Tray" v-on:click="addTray">
 					<i class="fa fa-plus"></i>
 				</div>
 			</div>

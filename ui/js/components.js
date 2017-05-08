@@ -36,8 +36,8 @@ Vue.component('tray', {
 		};
 	},
 	'template': `
-		<li class="vault-tray"> 
-			<div v-on:click="!editing && $emit('insert', data)" class="tray-segment tray-segment-fill" :class="{ clickable: !editing }">
+		<li class="vault-tray segmented"> 
+			<div v-on:click="!editing && $emit('insert', data)" class="segment fill" :class="{ clickable: !editing }">
 				<div class="tray-thumbnail">
 					<div class="thumbnail-overlay" v-on:click.stop="toggleEdit" :title="editing ? 'Save' : 'Edit'">
 						<i class="fa fa-pencil" v-if="!editing"></i>
@@ -55,15 +55,15 @@ Vue.component('tray', {
 				</div>
 			</div>
 
-			<div class="tray-segment tray-segment-button clickable" v-if="!editing" title="Copy password" v-on:click="copyPassword">
+			<div class="segment segment-button square clickable" v-if="!editing" title="Copy password" v-on:click="copyPassword">
 				<i class="fa fa-copy"></i>
 			</div>
 
-			<div class="tray-segment tray-segment-button clickable" v-if="editing" title="Undo recent changes" v-on:click="undoChanges">
+			<div class="segment segment-button square clickable" v-if="editing" title="Undo recent changes" v-on:click="undoChanges">
 				<i class="fa fa-undo"></i>
 			</div>
 
-			<div class="tray-segment tray-segment-button clickable danger" v-if="editing" title="Delete" v-on:click="$emit('delete', data)">
+			<div class="segment segment-button danger square clickable" v-if="editing" title="Delete" v-on:click="$emit('delete', data)">
 				<i class="fa fa-trash-o"></i>
 			</div>
 
