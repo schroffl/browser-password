@@ -4,3 +4,5 @@
 node_modules/
 
 private_key.pem
+
+ui/css/popup.css

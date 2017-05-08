@@ -1,0 +1,390 @@
+@vault-background-color: hsl(0, 0%, 90%);
+
+* {
+	margin: 0px;
+}
+
+body {
+	margin: 2px;
+	padding: 0px;
+
+	border: 1px solid #ccc;
+
+	font-family: Arial, sans-serif;
+
+	background-color: white;
+}
+
+.vault {
+	display: flex;
+
+	flex-direction: column;
+
+	width: 400px;
+	height: 400px;
+
+	.lock {
+		position: fixed;
+
+		display: table;
+
+		width: inherit;
+		height: inherit;
+
+		background-color: @vault-background-color;
+
+		.lock-container {
+			display: table-cell;
+
+			background-image: url('../img/gear.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 70%;
+
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		.lock-master-input {
+			height: 32px;
+			width: 40%;
+
+			line-height: 32px;
+			text-align: center;
+		
+			padding: 0px 6px;
+			
+			border: none;
+			border-radius: 5px;
+
+			font-size: 24px;
+
+			box-shadow: #000 0 0 7px;
+
+			transition: box-shadow .5s;
+
+			&:focus {
+				outline: none;
+				box-shadow: #000 0 0 25px;
+			}
+
+			&.wrong {
+				animation: shake .82s cubic-bezier(.36, .07, .19, .97) both;
+			}
+		}
+
+		&.open-anim {
+			@animation-duration: 1s;
+			@animation-ratio: .5;
+			
+			margin-left: 0px;
+
+			animation-name: open-vault-door;
+			animation-duration: @animation-duration * @animation-ratio;
+			animation-fill-mode: forwards;
+			animation-delay: @animation-duration * (1 - @animation-ratio);
+
+			.lock-container {
+				transform: rotate(0deg);
+
+				animation-name: turn-lock-open;
+				animation-duration: @animation-duration * (1 - @animation-ratio);
+				animation-fill-mode: forwards;
+			}
+		}
+
+		&.close-anim {
+			@animation-duration: 1.5s;
+			@animation-ratio: .5;
+
+			margin-left: -250%;
+
+			animation-name: close-vault-door;
+			animation-duration: @animation-duration * @animation-ratio;
+			animation-fill-mode: forwards;
+
+			.lock-container {
+				transform: rotate(-90deg);
+
+				animation-name: turn-lock-close;
+				animation-duration: @animation-duration * (1 - @animation-ratio);
+				animation-fill-mode: forwards;
+				animation-delay: @animation-duration * (1 - @animation-ratio);
+				animation-timing-function: ease-out;
+			}
+		}
+	}
+}
+
+.segmented {
+	display: flex;
+
+	.segment {
+		&.clickable {
+			cursor: pointer;
+
+			&:hover {
+				background-color: #f4f4f4;
+			}
+
+			&:active {
+				background-color: #eee;
+			}
+		}
+
+		&.segment-button{
+			user-select: none;
+			text-align: center;
+
+			font-size: 16px;
+		}
+
+		&.fill {
+			flex-grow: 1;
+		}
+
+		&.danger {
+			&:hover {
+				background-color: #f2dede;
+				color: #a94442;
+			}
+
+			&:active {
+				background-color: #f2d3d3;	
+			}
+		}
+	}
+}
+
+.vault-header {
+	flex-shrink: 0;
+
+	height: 50px;
+	line-height: 50px;
+
+	text-align: center;
+	text-transform: capitalize;
+
+	background-color: #fafafa;
+	border-bottom: 2px solid #ccc;
+
+	> * {
+		height: 50px;
+		line-height: 50px;
+	}
+
+	> .segment-button {
+		width: 50px;
+	} 
+}
+
+.vault-trays {
+	flex-grow: 1;
+
+	list-style: none;
+
+	overflow-y: auto;
+	
+	padding: 0px;
+
+	.vault-tray {
+		display: flex;
+		flex-flow: wrap;
+
+		padding: 0px;
+		border-bottom: 1px solid #eee;
+
+		.segment {
+			padding: 2px 6px;
+
+			height: 40px;
+			line-height: 40px;
+
+			&.segment-button.square {
+				width: 40px;
+			}
+		}
+
+		.tray-info {
+			display: inline-block;
+
+			margin-left: 5px;
+
+			font-size: 14px;
+
+			.tray-name {
+				font-family: Arial, sans-serif;
+				font-weight: bold;
+				font-size: 14px;
+			}
+
+			.edit-name {
+				border: none;
+				background: transparent;
+
+				border-bottom: 1px solid #ccc;
+
+				&:focus {
+					outline: none;
+				}
+			}
+
+			.tray-username {
+				color: #aaa;
+
+				&:before {
+					content: ' - ';
+				}
+			}
+		}
+
+		.tray-thumbnail {
+			display: inline-block;
+			
+			user-select: none;
+			
+			@padding: 1px;
+
+			padding: @padding;
+
+			width: 32px - @padding;
+			height: 32px - @padding;
+
+			margin-top: -4px;
+
+			vertical-align: middle;
+
+			border: 2px solid #ccc;
+			border-radius: 50%;
+
+			.thumbnail-overlay {
+				display: none;
+
+				width: 32px - @padding;
+				height: 32px - @padding;
+
+				font-size: 16px;
+				line-height: 32px;
+
+				text-align: center;
+				color: white;
+
+				background-color: #000;
+
+				cursor: pointer;
+
+				border-radius: 50%;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+
+				border-radius: 50%;
+			}
+
+			&:hover {
+				.thumbnail-overlay {
+					display: block;
+				}
+
+				img {
+					display: none;
+				}
+			}
+		}
+
+		.tray-editor {
+			@margin-top: -5px;
+			@padding-top: 4px;
+
+			padding: @padding-top - @margin-top 0px 12px 0px; 
+
+			border-left: 1px solid #ccc;
+
+			margin-top: @margin-top;
+			margin-left: 24px;
+
+			.tray-editor-section {
+				margin-bottom: 12px;
+				padding-left: 14px;
+
+				&:last-child {
+					margin-bottom: 0px;
+				}
+
+				h3 {
+					font-style: italic;
+					font-weight: 700;
+
+					padding-left: 8px;
+
+					text-transform: capitalize;
+
+					margin-left: -14px;
+					margin-bottom: 6px;
+
+					border-bottom: 1px solid #ccc;
+					border-image: linear-gradient(to right, #ddd 40%, transparent 100%);
+					border-image-slice: 1;
+				}
+
+				.section-content {
+					display: flex;
+					flex-flow: column;
+
+					.key-value-pair {
+						margin-bottom: 2px;
+						cursor: text;
+
+						&:last-child {
+							margin-bottom: 0px;
+						}
+					}
+
+					dd, dt {
+						display: inline-block;
+					}
+
+					dd {
+						text-transform: capitalize;
+						font-weight: 500;
+						cursor: help;
+					}
+				}
+			}
+		}
+	}
+}
+
+.light-input {
+	font-size: 12px;
+	background: transparent;
+	border: none;
+	border-radius: 5px;
+	padding: 2px 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	&:focus {
+		outline: none;
+		box-shadow: #777 0 0 6px;
+	}
+}
+
+@keyframes open-vault-door {
+	to { margin-left: -250%; }
+}
+
+@keyframes turn-lock-open {
+	to { transform: rotate(-90deg); }
+} 
+
+@keyframes close-vault-door {
+	to { margin-left: 0px; }
+}
+
+@keyframes turn-lock-close {
+	to { transform: rotate(360deg); }
+}
