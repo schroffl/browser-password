@@ -18,7 +18,10 @@
 	"content_scripts": [
 		{
 			"matches": [ "<all_urls>" ],
-			"js": [ "content-script.js" ]
+			"js": [ 
+				"content-scripts/jquery.js",
+				"content-scripts/form.js" 
+			]
 		}
 	],
 
