@@ -1,5 +1,7 @@
 'use strict';
 
+const extensionSource = [ 'manifest.json', 'LICENSE', 'content-scripts/**/*', 'background/**/*', 'ui/**/*', '!ui/less/**/*'  ];
+
 module.exports = function(grunt) {
 	grunt.initConfig({
 		'less': {
@@ -14,11 +16,11 @@ module.exports = function(grunt) {
 		},
 		'crx': {
 			'publicExtension': {
-				'src': [ 'manifest.json', 'LICENSE', 'content-script.js', 'background/**', 'ui/**', '!ui/less'  ],
+				'src': extensionSource,
 				'dest': 'dist/public.zip'
 			},
 			'signedExtension': {
-				'src': [ 'manifest.json', 'LICENSE', 'content-script.js', 'background/**', 'ui/**', '!ui/less' ],
+				'src': extensionSource,
 				'dest': 'dist/signed.crx',
 				'options': {
 					'privateKey': 'private_key.pem'
