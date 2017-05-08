@@ -11,11 +11,11 @@ module.exports = function(grunt) {
 		},
 		'crx': {
 			'publicExtension': {
-				'src': [ 'manifest.json', 'content-script.js', 'background/**', 'ui/**', '!ui/less'  ],
+				'src': [ 'manifest.json', 'LICENSE', 'content-script.js', 'background/**', 'ui/**', '!ui/less'  ],
 				'dest': 'dist/public.zip'
 			},
 			'signedExtension': {
-				'src': [ 'manifest.json', 'content-script.js', 'background/**', 'ui/**', '!ui/less' ],
+				'src': [ 'manifest.json', 'LICENSE', 'content-script.js', 'background/**', 'ui/**', '!ui/less' ],
 				'dest': 'dist/signed.crx',
 				'options': {
 					'privateKey': 'private_key.pem'
