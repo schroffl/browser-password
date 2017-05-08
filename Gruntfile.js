@@ -4,6 +4,9 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		'less': {
 			'production': {
+				'options': {
+					'compress': true
+				},
 				'files': {
 					'ui/css/popup.css': 'ui/less/popup.less'
 				}
