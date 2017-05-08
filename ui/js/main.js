@@ -6,7 +6,7 @@ Promise.all([ getVault(), onload() ]).then(result => {
 		'data': {
 			'vault': result.shift(),
 			'wrongPassword': false,
-			'showToolbar': true,
+			'showToolbar': false,
 			'title': 'Vault',
 			'justUnlocked': false,
 			'justLocked': false
