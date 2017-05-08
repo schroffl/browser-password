@@ -6,6 +6,7 @@ Promise.all([ getVault(), onload() ]).then(result => {
 		'data': {
 			'vault': result.shift(),
 			'wrongPassword': false,
+			'showToolbar': true,
 			'title': 'Vault',
 			'justUnlocked': false,
 			'justLocked': false
@@ -43,6 +44,9 @@ Promise.all([ getVault(), onload() ]).then(result => {
 		'ready': function() {
 			let lockElem = this.$el.querySelector('.lock'),
 				passwordElem = this.$el.querySelector('.lock input');
+
+			if(!lockElem || !passwordElem)
+				return;
 
 			lockElem.addEventListener('animationend', e => {
 				switch(e.animationName) {
