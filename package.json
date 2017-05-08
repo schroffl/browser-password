@@ -1,0 +1,24 @@
+{
+  "name": "browser-password",
+  "version": "0.1.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schroffl/browser-password.git"
+  },
+  "author": "schroffl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/schroffl/browser-password/issues"
+  },
+  "homepage": "https://github.com/schroffl/browser-password#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-less": "^1.4.1",
+    "grunt-crx": "^1.0.5"
+  }
+}
