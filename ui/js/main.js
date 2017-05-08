@@ -8,25 +8,25 @@ Promise.all([ getVault(), onload() ]).then(result => {
 			'wrongPassword': false,
 			'showLock': true,
 			'title': 'Vault',
-			'justUnlocked': false
+			'justUnlocked': false,
+			'justLocked': false
 		},
 		'methods': {
 			'unlock': function(event) {
 				let password = event.target.value,
 					lockEl = this.$el.querySelector('.lock');
-
-				lockEl.addEventListener('animationend', e => {
-					if(e.animationName !== 'open-vault') return;
-
-					event.target.value = '';
-				});
+				
+				this.justLocked = false;	
 
 				return this.vault.unlock(password)
 					.then(() => this.justUnlocked = true)
 					.catch(err => this.wrongPassword = true);
 			},
 			'lock': function() {
-				return this.vault.lock();
+				this.justUnlocked = false;
+
+				return this.vault.lock()
+					.then(() => this.justLocked = true);
 			},
 			'save': function() {
 				return this.vault.store();
