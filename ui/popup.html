@@ -18,17 +18,57 @@
 			</div>
 
 			<div class="vault-header segmented">
-				<div class="segment segment-button clickable" title="Close Vault" v-on:click="lock">
-					<i class="fa fa-lock"></i>
+				<div class="vault-title segment fill" v-if="!showToolbar">
+					<h1>{{ title }}<h1>
 				</div>
 
-				<div class="segment fill">
-					<h1 class="center">{{ title }}</h1>
+				<div class="vault-toolbar segment segmented fill" v-if="showToolbar">
+					<div class="segment segment-button fill clickable" title="Close Vault" v-on:click="lock">
+						<i class="fa fa-lock"></i>
+					</div>
+
+					<div class="segment segment-button fill clickable" title="Add Tray" v-on:click="addTray">
+						<i class="fa fa-plus"></i>
+					</div>
+
+					<div class="segment segment-button fill clickable" title="Settings">
+						<i class="fa fa-cog"></i>
+					</div>					
 				</div>
 
-				<div class="segment segment-button clickable" title="Add Tray" v-on:click="addTray">
-					<i class="fa fa-plus"></i>
+
+				<div class="segment segment-button vault-toolbar-button clickable" title="Toggle Toolbar" v-on:click="showToolbar = !showToolbar">
+					<i class="fa fa-bars"></i>
 				</div>
+			
+
+				<!--<div class="vault-title segmented" v-if="!showToolbar">
+					<div class="segment fill">
+						<h1 class="center">{{ title }}</h1>
+					</div>
+					
+					<div class="segment segment-button clickable" title="Show Toolbar" v-on:click="showToolbar = true">
+						<i class="fa fa-bars"></i>
+					</div>						
+				</div>
+
+				<div class="vault-toolbar segmented" v-if="showToolbar">
+					<div class="segment segment-button fill clickable" title="Close Vault" v-on:click="lock">
+						<i class="fa fa-lock"></i>
+					</div>
+					
+					<div class="segment segment-button fill clickable" title="Add Tray" v-on:click="addTray">
+						<i class="fa fa-plus"></i>
+					</div>
+
+					<div class="segment segment-button fill clickable" title="Settings">
+						<i class="fa fa-cog"></i>
+					</div>
+
+					<div class="segment segment-button fill clickable" title="Hide Toolbar" v-on:click="showToolbar = false">
+						<i class="fa fa-bars"></i>
+					</div>
+				</div>-->
 			</div>
 
 			<ul class="vault-trays">
