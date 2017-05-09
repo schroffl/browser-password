@@ -29,7 +29,8 @@
 		"scripts": [
 			"background/webcrypto.js",
 			"background/storage.js",
-			"background/vault.js"
+			"background/vault.js",
+			"background/cs-listener.js"
 		],
 		"persistent": false
 	}
