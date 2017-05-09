@@ -134,6 +134,8 @@ Vue.component('tray', {
 		if(this.data.new) {
 			this.data.new = false;
 			this.toggleEdit();
+
+			this.$el.scrollIntoView();
 		}
 	}
 });
