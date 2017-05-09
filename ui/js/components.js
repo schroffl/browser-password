@@ -51,7 +51,7 @@ Vue.component('tray', {
 					<input type="text" class="tray-name edit-name" v-model="data.name" v-if="editing" />
 
 					<span class="tray-name" v-if="!editing">{{ data.name }}</span>
-					<span class="tray-username" v-if="!editing">{{ data.props.credentials.username }}</span>
+					<span class="tray-username" v-if="data.props.credentials.username && !editing">{{ data.props.credentials.username }}</span>
 				</div>
 			</div>
 
