@@ -39,6 +39,9 @@ Promise.all([ getVault(), onload() ]).then(result => {
 			},
 			'removeTray': function(tray) {
 				this.vault.remove(tray);
+			},
+			'toggleToolbar': function() {
+				this.showToolbar = !this.showToolbar;
 			}
 		},
 		'ready': function() {
