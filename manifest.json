@@ -20,8 +20,8 @@
 			"matches": [ "<all_urls>" ],
 			"js": [ 
 				"content-scripts/jquery.js",
-				"content-scripts/form.js" 
 				"content-scripts/helper.js",
+				"content-scripts/login.js" 
 			]
 		}
 	],
