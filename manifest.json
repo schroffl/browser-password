@@ -21,6 +21,7 @@
 			"js": [ 
 				"content-scripts/jquery.js",
 				"content-scripts/form.js" 
+				"content-scripts/helper.js",
 			]
 		}
 	],
