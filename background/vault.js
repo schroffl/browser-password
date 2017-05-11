@@ -13,7 +13,7 @@ class Vault {
 	}
 
 	add() {
-		this.entries.push({
+		let index = this.entries.push({
 			'name': 'New Tray',
 			'new': true,
 			'props': {
@@ -28,7 +28,7 @@ class Vault {
 			}
 		});
 
-		return this.store();
+		return this.store().then(() => this.entries[index]);
 	}
 
 	remove(entry) {
