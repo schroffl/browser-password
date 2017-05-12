@@ -2,20 +2,26 @@ Vue.component('light-input', {
 	'props': [ 'min', 'max' ],
 	'template': `<input type="text" class="light-input" spellcheck="false" autcomplete="off" v-on:input="adjustWidth($el.value)">`,
 	'data': function() {
-		// FIXME: Not working well (it does the job but has a few quirks)
+		let span = document.createElement('span');
 
-		let canvas = document.createElement('canvas'),
-			ctx = canvas.getContext('2d');
+		span.style.font = '12px Arial, sans-serif';
+		span.style.position = 'absolute';
+		span.style.visibility = 'hidden';
+		span.style.top = '-1000px';
+		span.style.left = '-1000px';
 
-		canvas.font = '12px Arial';
+		document.body.appendChild(span);
 
-		return { ctx };
+		return { span, 'padding': 0 };
 	},  
 	'methods': {
 		'adjustWidth': function(text) {
 			let elem = this.$el,
-				len = this.ctx.measureText(text).width + 8;
-			
+				len;
+
+			this.span.innerText = text;
+
+			len = this.span.offsetWidth;
 			len = len < this.min ? this.min : len;
 			len = len > this.max ? this.max : len;
 
@@ -23,7 +29,14 @@ Vue.component('light-input', {
 		}
 	},
 	'ready': function() {
+		let computed = getComputedStyle(this.$el);
+
+		this.padding = parseInt(computed.paddingLeft, 10) + parseInt(computed.paddingRight, 10);
 		this.adjustWidth(this.$el.value);
+	},
+	'detached': function() {
+		// We don't want any memory leaks
+		document.body.removeChild(this.span);		
 	}
 });
 
