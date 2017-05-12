@@ -1,6 +1,6 @@
 Vue.component('light-input', {
 	'props': [ 'min', 'max' ],
-	'template': `<input type="text" class="light-input" spellcheck="false" autcomplete="off" v-on:input="adjustWidth($el.value)">`,
+	'template': `<input type="text" class="light-input" spellcheck="false" autcomplete="off" v-on:input="adjustWidth($el.value)" v-on:keydown="onkeydown">`,
 	'data': function() {
 		let span = document.createElement('span');
 
@@ -26,6 +26,10 @@ Vue.component('light-input', {
 			len = len > this.max ? this.max : len;
 
 			elem.style.width = len + 'px';
+		},
+		'onkeydown': function(e) {
+			if(e.keyCode === 13)
+				this.$el.blur();
 		}
 	},
 	'ready': function() {
