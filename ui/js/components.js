@@ -12,7 +12,7 @@ Vue.component('light-input', {
 
 		document.body.appendChild(span);
 
-		return { span, 'padding': 0 };
+		return { span };
 	},  
 	'methods': {
 		'adjustWidth': function(text) {
@@ -33,9 +33,6 @@ Vue.component('light-input', {
 		}
 	},
 	'ready': function() {
-		let computed = getComputedStyle(this.$el);
-
-		this.padding = parseInt(computed.paddingLeft, 10) + parseInt(computed.paddingRight, 10);
 		this.adjustWidth(this.$el.value);
 	},
 	'detached': function() {
