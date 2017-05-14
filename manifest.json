@@ -35,10 +35,5 @@
 			"background/cs-listener.js"
 		],
 		"persistent": false
-	},
-
-	"web_accessible_resources": [
-		"ui/img/*",
-		"page-ui*"
-	]
+	}
 }
