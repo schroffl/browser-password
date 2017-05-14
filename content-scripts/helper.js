@@ -4,6 +4,30 @@ function getFormElements(form) {
 		.map(key => form[key]);
 }
 
+function elementScore(element, regexMap) {
+	let score = 0;
+
+	for(let prop in regexMap) {
+		regexMap[prop].forEach(pair => {
+			let regex = pair[0],
+				reward = pair[1];
+
+			if(regex.test(element[prop]))
+				score += reward;
+		});
+	}
+
+	return score;
+}
+
+function getAllForms() {
+	return Array.from(document.forms).map(element => {
+		let inputs = formInputsObj(element, rules.inputs);
+
+		return Object.assign({ element }, inputs);
+	});
+}
+
 function calculateScore(form, scoreMap, testProperties) {
 	let formElements = getFormElements(form);
 
