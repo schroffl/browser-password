@@ -13,15 +13,16 @@
 
 	"permissions": [
 		"storage"
-	],	
+	],
 
 	"content_scripts": [
 		{
 			"matches": [ "<all_urls>" ],
 			"js": [ 
 				"content-scripts/jquery.js",
+				"content-scripts/rules.js",
 				"content-scripts/helper.js",
-				"content-scripts/login.js" 
+				"content-scripts/login.js"
 			]
 		}
 	],
@@ -34,5 +35,10 @@
 			"background/cs-listener.js"
 		],
 		"persistent": false
-	}
+	},
+
+	"web_accessible_resources": [
+		"ui/img/*",
+		"page-ui*"
+	]
 }
