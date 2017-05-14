@@ -7,6 +7,7 @@ class Vault {
 
 		this.storage = new EncryptedJSONStorage(chrome.storage.local);
 		this.entries = [ ];
+		this.settings = [ ];
 
 		this.key;
 		this.locked = true;
@@ -50,10 +51,8 @@ class Vault {
 					.then(() => key);				
 			})
 			.then(key => this.storage.get(this.id, key))
-			.then(entries => {
-				this.entries = entries;
-				this.locked = false;
-			});
+			.then(data => this.load(data))
+			.then(() => this.locked = false);
 	}
 
 	lock() {	
@@ -62,13 +61,26 @@ class Vault {
 			.then(() => this.reset());
 	}
 
+	load(data) {
+		this.entries = data.entries;
+		this.settings = data.settings;
+
+		return 'test';
+	}
+
 	store() {
+		let storeObj = {
+			'entries': this.entries,
+			'settings': this.settings			
+		};
+
 		return this.getKey()
-			.then(key => this.storage.set(this.id, this.entries, key));
+			.then(key => this.storage.set(this.id, storeObj, key));
 	}
 
 	reset() {
 		this.entries = [ ];
+		this.settigns = [ ];
 		this.key = null;
 		this.locked = true;
 	}
