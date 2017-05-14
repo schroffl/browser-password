@@ -46,7 +46,7 @@ Vue.component('tray', {
 	'data': function() {
 		return {
 			'editing': false,
-			'savepoint': null
+			'editCopy': null
 		};
 	},
 	'template': `
@@ -62,7 +62,7 @@ Vue.component('tray', {
 				</div>
 
 				<div class="tray-info">
-					<input type="text" class="tray-name edit-name" v-model="data.name" v-if="editing" />
+					<input type="text" class="tray-name edit-name" v-model="editCopy.name" v-if="editing" />
 
 					<span class="tray-name" v-if="!editing">{{ data.name }}</span>
 					<span class="tray-username" v-if="data.props.credentials.username && !editing">{{ data.props.credentials.username }}</span>
@@ -82,7 +82,7 @@ Vue.component('tray', {
 			</div>
 
 			<div class="tray-editor" v-if="editing">
-				<div class="tray-editor-section" v-for="(name, prop) in data.props">
+				<div class="tray-editor-section" v-for="(name, prop) in editCopy.props">
 					<h3>{{ name }}</h3>
 					
 					<dl class="section-content">
@@ -99,24 +99,20 @@ Vue.component('tray', {
 	`,
 	'methods': {
 		'toggleEdit': function() {
-			if(!this.editing)
-				this.createSavepoint();
-			else if(this.editing) {
-				// The save button was presed
+			if(!this.editing) 
+				this.editCopy = JSON.parse(JSON.stringify(this.data));
+			else {
 				this.$emit('save');
-				this.savepoint = null;
+
+				Object.assign(this.data, this.editCopy);
+
+				this.editCopy = null;
 			}
 
 			this.editing = !this.editing;
 		},
-		'createSavepoint': function() {
-			this.savepoint = JSON.parse(JSON.stringify(this.data));
-		},
 		'undoChanges': function() {
-			// FIXME: When resetting the data, the width of the input is not set appropriately 
-
-			Object.assign(this.data, this.savepoint);
-			this.createSavepoint();
+			this.editCopy = JSON.parse(JSON.stringify(this.data));
 		},
 		'copyPassword': function() {
 			let input = document.createElement('input');
