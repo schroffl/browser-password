@@ -55,3 +55,40 @@ function autofill(form) {
 
 	return getCredentials(domain).then(setFormData.bind(null, form));
 }
+
+function formInputsObj(form, map) {
+	let inputs = $(form).find('input'),
+		obj = { };
+
+	for(let name in map) {
+		let typeFilter = map[name].type.map(type => `[type=${type}]`).join(','),
+			regexMap = map[name].regexMap,
+			nominated = inputs.filter(typeFilter), // .filter(':visible') needs some revision
+			scores;
+
+		let matches = nominated
+			.get() // Convert to JavaScript Array
+			.map(input => ({ 'element': input, 'score': 0 }))
+			.map(input => {
+				for(let prop in regexMap) {
+					regexMap[prop].forEach(entry => {
+						let regex = entry[0],
+							score = entry[1];
+
+						if(regex.test(input.element[prop]))
+							input.score += score;
+					});
+				}
+
+				return input;
+			})
+			.filter(input => input.score > 0)
+			.sort((a, b) => b.score - a.score)
+			.map(input => input.element)
+			.slice(0, map[name].maxAmount || 1);
+		
+		obj[name] = $(matches);
+	}
+
+	return obj;
+}
