@@ -1,32 +1,11 @@
-const allowedTypes = [ 'text', 'password', 'email' ];
-const testProperties = [ 'id', 'name', 'className' ];
-const scoreMap = [
-	[ /username/g, 2 ],
-	[ /name/g, 1 ],
-	[ /search/g, -4 ],
-	[ /comment/g, -2 ],
-	[ /password/g, 2 ],
-	[ /pass/g, 2 ],
-	[ /login/g, 3 ],
-	[ /logon/g, 2 ]
-];
-
 function getLoginForms() {
-	return Array.from(document.forms).map(element => {
-		let inputs = $(element).find('input');
+	let regexMap = rules.loginForm.regexMap;
 
-		inputs = inputs.filter((i, input) => allowedTypes.includes(input.type));
-
-		return { element, inputs };
-	}).map(form => {
-		let element = form.element,
-			username = form.inputs.filter('[type=text], [type=email]').get(0),
-			password = form.inputs.filter('[type=password]').get(0);
-
-		return { element, username, password };
-	}).map(form => calculateScore(form, scoreMap, testProperties))
-	.filter(form => form.score > 0)
-	.sort((a, b) => b.score - a.score);
+	return getAllForms()
+		.map(form => ({ form, 'score': elementScore(form.element, regexMap) }))
+		.filter(form => form.score >= 0)
+		.sort((a, b) => b.score - a.score)
+		.map(form => form.form);
 }
 
 function onDomChange() {
