@@ -47,12 +47,8 @@ function setFormData(form, credentials) {
 	if(!form || !credentials)
 		return;
 
-	for(let credential in credentials) {
-		let value = credentials[credential];
-
-		if(form[credential] && value)
-			form[credential].value = value;
-	}
+	for(let credential in credentials)
+		form[credential].val(credentials[credential]);
 }
 
 function autofill(form) {
@@ -73,20 +69,7 @@ function formInputsObj(form, map) {
 
 		let matches = nominated
 			.get() // Convert to JavaScript Array
-			.map(input => ({ 'element': input, 'score': 0 }))
-			.map(input => {
-				for(let prop in regexMap) {
-					regexMap[prop].forEach(entry => {
-						let regex = entry[0],
-							score = entry[1];
-
-						if(regex.test(input.element[prop]))
-							input.score += score;
-					});
-				}
-
-				return input;
-			})
+			.map(input => ({ 'element': input, 'score': elementScore(input, regexMap) }))
 			.filter(input => input.score > 0)
 			.sort((a, b) => b.score - a.score)
 			.map(input => input.element)
