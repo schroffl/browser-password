@@ -54,7 +54,9 @@ function setFormData(form, credentials) {
 function autofill(form) {
 	let domain = getDomain();
 
-	return getCredentials(domain).then(setFormData.bind(null, form));
+	return getCredentials(domain)
+		.then(setFormData.bind(null, form))
+		.catch(console.warn);
 }
 
 function formInputsObj(form, map) {
