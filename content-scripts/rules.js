@@ -2,7 +2,9 @@ const rules = (function() {
 	const usernameRegex = /(username|name|user|pseudo)/gi;
 	const passwordRegex = /(password|pass)/gi;
 	const emailRegex = /(email|mail)/gi;
-	const confirmationRegex = /conf/gi
+	const confirmationRegex = /conf/gi;
+	const loginFormRegex = /(login|sign-?in)/gi;
+	const signupFormRegex = /(registration|register|sign-?up|reg)/gi;
 
 	function reward(regex, score) {
 		return [ regex, score ];
@@ -37,6 +39,21 @@ const rules = (function() {
 				},
 				'type': [ 'email', 'text' ],
 				'maxAmount': 2
+			}
+		},
+		'loginForm': {
+			'regexMap': {
+				'id': [ reward(loginFormRegex, 4), reward(signupFormRegex, -4) ],
+				'name': [ reward(loginFormRegex, 4), reward(loginFormRegex, -4) ],
+				'className': [ reward(loginFormRegex, 2) ]
+			}
+		},
+		'signupForm': {
+			'regexMap': {
+				'id': [ reward(signupFormRegex, 4), reward(loginFormRegex, -4) ],
+				'name': [ reward(loginFormRegex, 4), reward(loginFormRegex, -4) ],
+				'className': [ reward(signupFormRegex, 2) ],
+				'action': [ reward(signupFormRegex, 2) ]
 			}
 		}
 	};
