@@ -28,25 +28,6 @@ function getAllForms() {
 	});
 }
 
-function calculateScore(form, scoreMap, testProperties) {
-	let formElements = getFormElements(form);
-
-	form.score = 0;
-
-	scoreMap.forEach(entry => {
-		let regex = entry[0],
-			score = entry[1];
-
-		formElements.forEach(element => {
-			testProperties.forEach(prop => {
-				form.score += regex.test(element[prop]) ? score : 0
-			});
-		});
-	});
-
-	return form;
-}
-
 function getDomain() {
 	return location.hostname;
 }
