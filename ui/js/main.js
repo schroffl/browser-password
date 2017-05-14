@@ -7,11 +7,14 @@ Promise.all([ getVault(), onload() ]).then(result => {
 			'vault': result.shift(),
 			'wrongPassword': false,
 			'showToolbar': false,
-			'title': 'Vault',
+			'page': 'vault',
 			'justUnlocked': false,
 			'justLocked': false
 		},
 		'methods': {
+			'showPage': function(page) {
+				this.page = page;
+			},
 			'unlock': function(event) {
 				let password = event.target.value,
 					lockEl = this.$el.querySelector('.lock');

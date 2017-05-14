@@ -19,7 +19,7 @@
 
 			<div class="vault-header segmented">
 				<div class="vault-title segment fill" v-if="!showToolbar">
-					<h1>{{ title }}<h1>
+					<h1>{{ page }}<h1>
 				</div>
 
 				<div class="vault-toolbar segment segmented fill" v-if="showToolbar" v-on:click="toggleToolbar">
@@ -31,20 +31,32 @@
 						<i class="fa fa-plus"></i>
 					</div>
 
-					<div class="segment segment-button fill clickable" title="Settings">
+					<div class="segment segment-button fill clickable" title="Generate Data" v-on:click="showPage('generator')">
+						<i class="fa fa-id-card-o"></i>
+					</div>
+
+					<div class="segment segment-button fill clickable" title="Settings" v-on:click="showPage('settings')">
 						<i class="fa fa-cog"></i>
-					</div>					
+					</div>
 				</div>
 
-
-				<div class="segment segment-button vault-toolbar-button clickable" title="Toggle Toolbar" v-on:click="toggleToolbar">
-					<i class="fa fa-bars"></i>
+				<div class="segment segment-button vault-toolbar-button clickable" :title="page === 'vault' ? 'Toggle Toolbar' : 'Vault'" v-on:click="page === 'vault' ? toggleToolbar() : showPage('vault')">
+					<i class="fa fa-bars" v-if="page === 'vault'"></i>
+					<i class="fa fa-long-arrow-left" v-if="page !== 'vault'"></i>
 				</div>
 			</div>
 
-			<ul class="vault-trays">
-				<tray v-for="entry in vault.entries" :data="entry" v-on:insert="insertData" v-on:delete="removeTray" v-on:save="save"> 
-			</ul>
+			<div class="vault-content">
+				<ul class="vault-trays" v-if="page === 'vault'">
+					<tray v-for="entry in vault.entries" :data="entry" v-on:insert="insertData" v-on:delete="removeTray" v-on:save="save"></tray>
+				</ul>
+
+				<ul class="vault-settings" v-if="page === 'settings'">
+				</ul>
+
+				<ul class="data-generator" v-if="page === 'generator'">
+				</ul>
+			</div>
 		</div>
 	</body>
 </html>
