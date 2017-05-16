@@ -28,6 +28,14 @@ function getAllForms() {
 	});
 }
 
+function getFormsByRegex(regexMap) {
+	return getAllForms()
+		.map(form => ({ form, 'score': elementScore(form.element, regexMap) }))
+		.filter(form => form.score >= 0)
+		.sort((a, b) => b.score - a.score)
+		.map(form => form.form)
+}
+
 function getDomain() {
 	return location.hostname;
 }
@@ -43,12 +51,12 @@ function getCredentials(domain) {
 	});
 }
 
-function setFormData(form, credentials) {
-	if(!form || !credentials)
+function setFormData(form, data) {
+	if(!form || !data)
 		return;
 
-	for(let credential in credentials)
-		form[credential].val(credentials[credential]);
+	for(let credential in data)
+		form[credential].val(data[credential]);
 }
 
 function autofill(form) {
