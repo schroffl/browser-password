@@ -39,7 +39,15 @@ Promise.all([ getVault(), onload() ]).then(result => {
 				return sendMessageToActiveTab({ 'action': 'insert', data }).then(window.close);
 			},
 			'addTray': function() {
-				this.vault.add();
+				return Promise.all([ sendMessageToActiveTab({ 'action': 'getFormData' }), this.vault.add() ]).then(result => {
+					let data = result[0],
+						tray = result[1];
+
+					for(let key in data) {
+						if(key in tray.props.credentials) 
+							tray.props.credentials[key] = data[key];
+					}
+				});
 			},
 			'removeTray': function(tray) {
 				this.vault.remove(tray);
