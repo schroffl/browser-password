@@ -22,7 +22,8 @@
 				"content-scripts/jquery.js",
 				"content-scripts/rules.js",
 				"content-scripts/helper.js",
-				"content-scripts/login.js"
+				"content-scripts/login.js",
+				"content-scripts/signup.js"
 			]
 		}
 	],
