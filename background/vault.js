@@ -20,11 +20,12 @@ class Vault {
 			'props': {
 				'credentials': {
 					'username': '',
+					'email': '',
 					'password': ''
 				},
 				'other': {
-					'thumbnail': 'img/key.svg',
-					'domain': ''
+					'domain': '',
+					'thumbnail': 'img/key.svg'
 				}
 			}
 		});
