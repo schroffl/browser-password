@@ -5,14 +5,15 @@ function getFormElements(form) {
 }
 
 function elementScore(element, regexMap) {
-	let score = 0;
+	let score = 0,
+		$element = $(element);
 
 	for(let prop in regexMap) {
 		regexMap[prop].forEach(pair => {
 			let regex = pair[0],
 				reward = pair[1];
 
-			if(regex.test(element[prop]))
+			if(regex.test($element.attr(prop)))
 				score += reward;
 		});
 	}
@@ -24,7 +25,7 @@ function getAllForms() {
 	return Array.from(document.forms).map(element => {
 		let inputs = formInputsObj(element, rules.inputs);
 
-		return Object.assign({ element }, inputs);
+		return Object.assign({ 'element': $(element) }, inputs);
 	});
 }
 
