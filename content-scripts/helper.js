@@ -55,8 +55,10 @@ function setFormData(form, data) {
 	if(!form || !data)
 		return;
 
-	for(let credential in data)
-		form[credential].val(data[credential]);
+	for(let prop in data) {
+		if(form[prop])
+			form[prop].val(data[prop]);
+	}
 }
 
 function autofill(form) {
