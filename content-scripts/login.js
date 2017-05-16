@@ -1,11 +1,5 @@
 function getLoginForms() {
-	let regexMap = rules.loginForm.regexMap;
-
-	return getAllForms()
-		.map(form => ({ form, 'score': elementScore(form.element, regexMap) }))
-		.filter(form => form.score >= 0)
-		.sort((a, b) => b.score - a.score)
-		.map(form => form.form);
+	return getFormsByRegex(rules.loginForm.regexMap);
 }
 
 function onDomChange() {
