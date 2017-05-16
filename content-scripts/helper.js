@@ -37,6 +37,16 @@ function getFormsByRegex(regexMap) {
 		.map(form => form.form)
 }
 
+function isFormFilled(form) {
+	let username = form.username.val() || form.email.val(),
+		password = form.password.val();
+
+	username = typeof username === 'string' ? username.trim() : null;
+	password = typeof password === 'string' ? password.trim() : null;
+
+	return username && password;
+}
+
 function getDomain() {
 	return location.hostname;
 }
