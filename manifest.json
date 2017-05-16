@@ -23,7 +23,8 @@
 				"content-scripts/rules.js",
 				"content-scripts/helper.js",
 				"content-scripts/login.js",
-				"content-scripts/signup.js"
+				"content-scripts/signup.js",
+				"content-scripts/msg-listener.js"
 			]
 		}
 	],
