@@ -16,9 +16,8 @@ Promise.all([ getVault(), onload() ]).then(result => {
 				this.page = page;
 			},
 			'unlock': function(event) {
-				let password = event.target.value,
-					lockEl = this.$el.querySelector('.lock');
-				
+				let password = event.target.value;
+
 				this.justLocked = false;	
 
 				return this.vault.unlock(password)
