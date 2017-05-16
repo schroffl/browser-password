@@ -32,7 +32,7 @@ function getAllForms() {
 function getFormsByRegex(regexMap) {
 	return getAllForms()
 		.map(form => ({ form, 'score': elementScore(form.element, regexMap) }))
-		.filter(form => form.score >= 0)
+		.filter(form => form.score > 0)
 		.sort((a, b) => b.score - a.score)
 		.map(form => form.form)
 }
