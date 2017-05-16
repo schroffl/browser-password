@@ -33,7 +33,9 @@ Promise.all([ getVault(), onload() ]).then(result => {
 			'save': function() {
 				return this.vault.store();
 			},
-			'insertData': function(data) {
+			'insertData': function(tray) {
+				let data = tray.props.credentials;
+
 				return sendMessageToActiveTab({ 'action': 'insert', data }).then(window.close);
 			},
 			'addTray': function() {
