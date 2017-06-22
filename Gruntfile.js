@@ -36,13 +36,15 @@ module.exports = function(grunt) {
 					'privateKey': 'private_key.pem'
 				}
 			}
-		}
+		},
+		'clean': [ 'temp/' ]
 	});
 	
 
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-crx');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
-	grunt.registerTask('default', [ 'copy', 'less', 'crx' ]);
+	grunt.registerTask('default', [ 'copy', 'less', 'crx', 'clean' ]);
 };
