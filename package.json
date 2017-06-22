@@ -18,6 +18,7 @@
   "homepage": "https://github.com/schroffl/browser-password#readme",
   "devDependencies": {
     "grunt": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-less": "^1.4.1",
     "grunt-crx": "^1.0.5"
   }

@@ -1,16 +1,26 @@
 'use strict';
 
-const extensionSource = [ 'manifest.json', 'LICENSE', 'content-scripts/**/*', 'background/**/*', 'ui/**/*', '!ui/less/**/*'  ];
+const extensionSource = [ 'temp/**/*' ];
 
 module.exports = function(grunt) {
 	grunt.initConfig({
+		'copy': {
+			'main': {
+				'files': [
+					{ 'expand': true, 'src': 'manifest.json', 'dest': 'temp' },
+					{ 'expand': true, 'src': 'ui/**', 'dest': 'temp/ui' },
+					{ 'expand': true, 'src': 'background/**', 'dest': 'temp/background' },
+					{ 'expand': true, 'src': 'content-scripts/**', 'dest': 'temp/content-scripts' }
+				]			
+			}
+		},
 		'less': {
 			'production': {
 				'options': {
 					'compress': true
 				},
 				'files': {
-					'ui/css/popup.css': 'ui/less/popup.less'
+					'temp/ui/css/popup.css': 'temp/ui/less/popup.less'
 				}
 			}
 		},
@@ -30,8 +40,9 @@ module.exports = function(grunt) {
 	});
 	
 
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-crx');
 
-	grunt.registerTask('default', [ 'less', 'crx' ]);
+	grunt.registerTask('default', [ 'copy', 'less', 'crx' ]);
 };
