@@ -65,8 +65,6 @@ class Vault {
 	load(data) {
 		this.entries = data.entries;
 		this.settings = data.settings;
-
-		return 'test';
 	}
 
 	store() {
