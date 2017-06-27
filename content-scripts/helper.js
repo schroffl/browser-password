@@ -1,9 +1,3 @@
-function getFormElements(form) {
-	return Object.keys(form)
-		.filter(key => form[key] instanceof HTMLElement)
-		.map(key => form[key]);
-}
-
 function elementScore(element, regexMap) {
 	let score = 0,
 		$element = $(element);
