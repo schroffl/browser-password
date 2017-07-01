@@ -1,6 +1,6 @@
 Vue.component('light-input', {
-	'props': [ 'min', 'max' ],
-	'template': `<input type="text" class="light-input" spellcheck="false" autcomplete="off" v-on:input="adjustWidth($el.value)" v-on:keydown="onkeydown">`,
+	'props': [ 'min', 'max', 'name' ],
+	'template': `<input :type="name === 'password' ? 'password' : 'text'" class="light-input" spellcheck="false" autcomplete="off" v-on:input="adjustWidth($el.value)" v-on:keydown="onkeydown">`,
 	'data': function() {
 		let span = document.createElement('span');
 

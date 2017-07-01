@@ -46,7 +46,7 @@ Vue.component('tray', {
 						<div v-for="(key, val) in prop" class="key-value-pair" v-on:click.stop="focusInput">  
 							<dd>{{ key }}:</dd>
 							<dt>
-								<light-input v-model="prop[key]" :min="10" :max="130">
+								<light-input v-model="prop[key]" :min="10" :max="130" :name="key">
 							</dt>
 						</div>
 					</dl>
