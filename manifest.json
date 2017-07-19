@@ -8,35 +8,16 @@
 	
 	"browser_action": {
 		"default_title": "Simple Password Manager",
-		"default_popup": "ui/popup.html"
+		"default_popup": "popup/popup.html"
 	},
 
-	"permissions": [
-		"storage"
-	],
+	"permissions": [ ],
 
 	"content_scripts": [
 		{
 			"matches": [ "<all_urls>" ],
 			"all_frames": true,
-			"js": [ 
-				"content-scripts/jquery.js",
-				"content-scripts/rules.js",
-				"content-scripts/helper.js",
-				"content-scripts/login.js",
-				"content-scripts/signup.js",
-				"content-scripts/msg-listener.js"
-			]
+			"js": [ "content-scripts/jquery.js" ]
 		}
-	],
-
-	"background": {
-		"scripts": [
-			"background/webcrypto.js",
-			"background/storage.js",
-			"background/vault.js",
-			"background/cs-listener.js"
-		],
-		"persistent": false
-	}
+	]
 }
